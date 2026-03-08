@@ -215,10 +215,11 @@ public class DBUtil {
             pstmt.setString(1, user);
             pstmt.setString(2, password);
 
-            ResultSet resultSet = pstmt.executeQuery();
-            if (resultSet.next()) {
-                if (resultSet.getInt(1) > 0)
-                    return true;
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                if (resultSet.next()) {
+                    if (resultSet.getInt(1) > 0)
+                        return true;
+                }
             }
         }
 
