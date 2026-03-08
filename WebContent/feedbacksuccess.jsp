@@ -39,7 +39,10 @@ IBM AltoroJ
 		
 		 <h1>Thank You</h1>
 		 
-		 <p>Thank you for your comments<%= (request.getAttribute("message_feedback")!=null)?", "+request.getAttribute("message_feedback"):"" %>.  They will be reviewed by our Customer Service staff and given the full attention that they deserve. 
+		 <p>Thank you for your comments<%= (request.getAttribute("message_feedback")!=null) ?
+				 ", "+ServletUtil.sanitzieHtmlWithRegex((String) request.getAttribute("message_feedback"))
+				 :"" %>.
+			 They will be reviewed by our Customer Service staff and given the full attention that they deserve.
 		 <% String email = (String) request.getParameter("email_addr"); 
 		 	boolean regExMatch = email!=null && email.matches(ServletUtil.EMAIL_REGEXP);
 		 	if (email != null && email.trim().length() != 0 && regExMatch) {%> 

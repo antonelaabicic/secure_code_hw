@@ -41,7 +41,7 @@ IBM AltoroJ
 		
 		<p>No results were found for the query:<br /><br />
 		
-		<%= query %>
+		<%= ServletUtil.sanitzieHtmlWithRegex(query) %>
 		
 		</div>    
     </td>	

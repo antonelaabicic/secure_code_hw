@@ -211,20 +211,20 @@ public class DBUtil {
 		Connection connection = getConnection();
 
 		String query = "SELECT COUNT(*) FROM PEOPLE WHERE USER_ID = ? AND PASSWORD = ?";
-		PreparedStatement pstmt = connection.prepareStatement( query );
-		pstmt.setString( 1, user);
-		pstmt.setString( 2, password);
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, user);
+            pstmt.setString(2, password);
 
-		ResultSet resultSet = pstmt.executeQuery( );
-		if (resultSet.next()){
-				if (resultSet.getInt(1) > 0)
-					return true;
-		}
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                if (resultSet.getInt(1) > 0)
+                    return true;
+            }
 
-		resultSet.close();
-		pstmt.close();
+            resultSet.close();
+        }
 
-		return false;
+        return false;
 	}
 	
 
