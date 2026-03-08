@@ -247,6 +247,10 @@ public class ServletUtil {
 	}
 
 	public static String sanitzieHtmlWithRegex(String input) {
+		if (input == null) {
+			return "";
+		}
+
 		if (XSS_REGEXP.matcher(input).matches()) {
 			return "";
 		}
