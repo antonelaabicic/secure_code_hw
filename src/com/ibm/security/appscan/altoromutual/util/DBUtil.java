@@ -18,12 +18,7 @@ IBM AltoroJ
 
 package com.ibm.security.appscan.altoromutual.util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -214,15 +209,21 @@ public class DBUtil {
 			return false; 
 		
 		Connection connection = getConnection();
-		Statement statement = connection.createStatement();
-		
-		ResultSet resultSet =statement.executeQuery("SELECT COUNT(*)FROM PEOPLE WHERE USER_ID = '"+ user +"' AND PASSWORD='" + password + "'"); /* BAD - user input should always be sanitized */
-		
+
+		String query = "SELECT COUNT(*) FROM PEOPLE WHERE USER_ID = ? AND PASSWORD = ?";
+		PreparedStatement pstmt = connection.prepareStatement( query );
+		pstmt.setString( 1, user);
+		pstmt.setString( 2, password);
+
+		ResultSet resultSet = pstmt.executeQuery( );
 		if (resultSet.next()){
-			
 				if (resultSet.getInt(1) > 0)
 					return true;
 		}
+
+		resultSet.close();
+		pstmt.close();
+
 		return false;
 	}
 	
