@@ -220,8 +220,6 @@ public class DBUtil {
                 if (resultSet.getInt(1) > 0)
                     return true;
             }
-
-            resultSet.close();
         }
 
         return false;
