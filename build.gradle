@@ -1,4 +1,7 @@
 
+plugins {
+	id 'org.sonarqube' version '4.4.1.3373'
+}
 apply plugin: 'war'
 
 webAppDirName = 'WebContent'
@@ -40,4 +43,12 @@ war {
 	archiveFileName = 'altoromutual.war'
 	exclude 'WEB-INF/classes/**/*.class'
 	exclude 'WEB-INF/lib/**/*.jar'
+}
+
+sonar {
+	properties
+		{
+			property 'sonar.projectKey', 'AltoroJ'
+			property 'sonar.host.url', 'http://localhost:9000'
+		}
 }

@@ -1,2 +1,13 @@
 /.gradle/
 /bin/
+build/
+
+.idea/
+*.iml
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+build/sonar/
